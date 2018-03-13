@@ -1,0 +1,28 @@
+body, html {
+    height: 100%;
+    color: #ffffff;
+    background-color: #333;
+}
+    
+.jumbotron {
+    height: 100%;
+    background-color: #333;
+    padding: 1em 0;
+    margin-bottom: 0;
+  }
+
+#letters_guessed li {
+    display: inline;
+}
+
+.card {
+    color: #333333;
+}
+
+h6, #wins {
+    margin-bottom: 1em;
+}
+
+#game {
+    font-size: 140%;
+}
