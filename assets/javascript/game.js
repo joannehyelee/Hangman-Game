@@ -45,12 +45,28 @@ function marioGame() {
     var keysPressed = [];
     
     var newP = document.createElement("p");
-    newP.textContent = hangMan.games[0].blanks;
+    newP.textContent = hangMan.games[1].blanks;
     gameDiv.appendChild(newP);
 
     document.onkeyup = function(event) {
         var letter = event.key.toUpperCase();
         keysPressed.push(letter);
+
+        if (keysPressed.indexOf(letter) > -1) {
+            for (var i = 0; i < keysPressed.length; i++) {
+                for (var j = i + 1; j < keysPressed.length; j++) {
+                    if (keysPressed[i] === keysPressed[j]) {
+                        alert("You already guessed this letter!");
+                        
+                        keysPressed.pop();
+        
+                        console.log(newL);
+                        lettersDiv.removeChild(newL.lastChild);
+                    }
+                }
+            }
+            console.log(keysPressed);
+        }
 
         if (letter === "M") {
             var newArr = hangMan.games[0].blanks.split(" ");
@@ -59,8 +75,6 @@ function marioGame() {
             var newGame = newArr.join(" ");
             hangMan.games[0].blanks = newGame;
             newP.textContent = newGame;
-
-            lettersDiv.removeChild(newL);
         }
 
         if (letter === "A") {
@@ -70,8 +84,6 @@ function marioGame() {
             var newGame = newArr.join(" ");
             hangMan.games[0].blanks = newGame;
             newP.textContent = newGame;
-
-            lettersDiv.removeChild(newL);
         }
 
         if (letter === "R") {
@@ -81,8 +93,6 @@ function marioGame() {
             var newGame = newArr.join(" ");
             hangMan.games[0].blanks = newGame;
             newP.textContent = newGame;
-
-            lettersDiv.removeChild(newL);
         }
 
         if (letter === "I") {
@@ -107,8 +117,11 @@ function marioGame() {
             guesses--;
             newG.textContent = guesses;
 
+            newL.textContent += letter;
+            lettersDiv.appendChild(newL);
+
             if (guesses === 0) {
-                alert ("SORRY... NO MORE GUESSES!");
+                alert ("SORRY... THE WORD WAS 'MARIO'!");
                 gameDiv.removeChild(newP);
                 guessesDiv.removeChild(newG);
                 lettersDiv.removeChild(newL);
@@ -117,29 +130,9 @@ function marioGame() {
             }
         }
 
-        if (keysPressed.indexOf(letter) > -1) {
-            var newL = document.createElement("span");
+        if (newP.textContent === "M A R I O") {
             newL.textContent += letter;
             lettersDiv.appendChild(newL);
-            for (var i = 0; i < keysPressed.length; i++) {
-                for (var j = i + 1; j < keysPressed.length; j++) {
-                    if (keysPressed[i] === keysPressed[j]) {
-                        alert("NO DOUBLES");
-
-                        keysPressed.pop();
-
-                        guesses++;
-                        newG.textContent = guesses;
-
-                        console.log(newL);
-                        lettersDiv.removeChild(newL);
-                    }
-                }
-            }
-            console.log(keysPressed);
-        }
-
-        if (newP.textContent === "M A R I O") {
 
             wins++;
             newW.textContent = wins;
@@ -181,6 +174,22 @@ function luigiGame() {
     document.onkeyup = function(event) {
         var letter = event.key.toUpperCase();
         keysPressed.push(letter);
+
+        if (keysPressed.indexOf(letter) > -1) {
+            for (var i = 0; i < keysPressed.length; i++) {
+                for (var j = i + 1; j < keysPressed.length; j++) {
+                    if (keysPressed[i] === keysPressed[j]) {
+                        alert("You already guessed this letter!");
+                        
+                        keysPressed.pop();
+        
+                        console.log(newL);
+                        lettersDiv.removeChild(newL.lastChild);
+                    }
+                }
+            }
+            console.log(keysPressed);
+        }
 
         if (letter === "L") {
             var newArr = hangMan.games[1].blanks.split(" ");
@@ -227,26 +236,21 @@ function luigiGame() {
             lettersDiv.appendChild(newL);
 
             if (guesses === 0) {
-                alert ("SORRY... NO MORE GUESSES!");
+                alert ("SORRY... THE WORD WAS 'LUIGI'!");
                 gameDiv.removeChild(newP);
                 guessesDiv.removeChild(newG);
                 lettersDiv.removeChild(newL);
                 card.removeChild(image);
-                luigiGame();
-            }
-        }
-
-        if (keysPressed.indexOf(letter) > -1) {
-            for (var i = 0; i < keysPressed.length; i++) {
-                if (keysPressed.includes(letter) > 2) {
-                    alert("NO");
-                }
+                kirbyGame();
             }
         }
 
         if (newP.textContent === "L U I G I") {
             newL.textContent += letter;
             lettersDiv.appendChild(newL);
+
+            wins++;
+            newW.textContent = wins;
 
             alert ("CONGRATS! YOU GUESSED CORRECTLY :)");
             gameDiv.removeChild(newP);
@@ -266,6 +270,7 @@ function kirbyGame() {
     image.setAttribute("alt", "Game Image 3");
     card.insertBefore(image, card.firstChild);
 
+    // Guesses Remaining
     var guesses = 10;
     var newG = document.createElement("span");
     newG.textContent = guesses;
@@ -283,6 +288,22 @@ function kirbyGame() {
     document.onkeyup = function(event) {
         var letter = event.key.toUpperCase();
         keysPressed.push(letter);
+
+        if (keysPressed.indexOf(letter) > -1) {
+            for (var i = 0; i < keysPressed.length; i++) {
+                for (var j = i + 1; j < keysPressed.length; j++) {
+                    if (keysPressed[i] === keysPressed[j]) {
+                        alert("You already guessed this letter!");
+                        
+                        keysPressed.pop();
+        
+                        console.log(newL);
+                        lettersDiv.removeChild(newL.lastChild);
+                    }
+                }
+            }
+            console.log(keysPressed);
+        }
 
         if (letter === "K") {
             var newArr = hangMan.games[2].blanks.split(" ");
@@ -304,71 +325,53 @@ function kirbyGame() {
 
         if (letter === "R") {
             var newArr = hangMan.games[2].blanks.split(" ");
-            console.log(newArr);
-            // returns ["M", "_", "_", "_", "_"];
 
             newArr[2] = "R";
             var newGame = newArr.join(" ");
-
             hangMan.games[2].blanks = newGame;
-
             newP.textContent = newGame;
         }
 
         if (letter === "B") {
             var newArr = hangMan.games[2].blanks.split(" ");
-            console.log(newArr);
-            // returns ["M", "_", "_", "_", "_"];
 
             newArr[3] = "B";
             var newGame = newArr.join(" ");
-
             hangMan.games[2].blanks = newGame;
-
             newP.textContent = newGame;
         }
 
         if (letter === "Y") {
             var newArr = hangMan.games[2].blanks.split(" ");
-            console.log(newArr);
-            // returns ["M", "_", "_", "_", "_"];
 
             newArr[4] = "Y";
             var newGame = newArr.join(" ");
-
             hangMan.games[2].blanks = newGame;
-
             newP.textContent = newGame;
-            
         }
 
         if (arr.indexOf(letter) < 0) {
             guesses--;
             newG.textContent = guesses;
-            console.log(guesses);
 
-            // var newL = document.createElement("span");
             newL.textContent += letter;
             lettersDiv.appendChild(newL);
 
             if (guesses === 0) {
-                alert ("SORRY... NO MORE GUESSES!");
-            }
-        }
-
-        if (keysPressed.indexOf(letter) > -1) {
-            for (var i = 0; i < keysPressed.length; i++) {
-                if (keysPressed.includes(letter) > 2) {
-                    alert("NO");
-                }
+                alert ("SORRY... THE WORD WAS 'KIRBY'!");
+                lettersDiv.removeChild(newL);
             }
         }
 
         if (newP.textContent === "K I R B Y") {
+            newL.textContent += letter;
+            lettersDiv.appendChild(newL);
+
+            wins++;
+            newW.textContent = wins;
+
             alert ("CONGRATS! YOU GUESSED CORRECTLY :)");
-            // gameDiv.removeChild(newP);
-            // guessesDiv.removeChild(newG);
-            // lettersDiv.removeChild(newL);
+            lettersDiv.removeChild(newL);
         }
     } 
 }
